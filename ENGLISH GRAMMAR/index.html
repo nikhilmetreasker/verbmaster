@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+   
+        }
+
+        nav {
+            background-color: yellow;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            list-style: none;
+            align-items: center; /* Align items vertically */
+            justify-content: space-around; /* Space out the buttons evenly */
+        }
+
+        button {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: yellow;
+            border: none; /* Remove border */
+            height: 7vh;
+            cursor: pointer;
+            width: 150px;
+            text-align: center;
+        }
+
+      
+
+        table {
+            width: 100%;
+            margin-top: 0px;
+            border-collapse: collapse;
+        }
+
+        th {
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: black;
+        }
+
+        td {
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        /* Styling for odd and even rows */
+        tr:nth-child(odd) {
+            background-color: #333; /* Dark grey for odd rows */
+        }
+
+        tr:nth-child(even) {
+            background-color: #222; /* Slightly darker grey for even rows */
+        }
+
+        /* Media Queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            table {
+                font-size: 14px; /* Smaller text on smaller screens */
+            }
+
+            td, th {
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+
+            button {
+                font-size: 14px;
+                width: 120px; /* Adjust button size */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            table {
+                font-size: 12px; /* Even smaller font size */
+            }
+
+            td, th {
+                padding: 8px; /* Reduce padding even more */
+            }
+
+            button {
+                font-size: 12px;
+                width: 100px; /* Adjust button size */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="regularone.html" target="_blank">
+                <button>Regular Verbs</button>
+            </a>
+
+            <a href="index.html" target="_blank">
+                <button>Irregular Verbs</button>
+            </a>
+
+
+            <a href="aboutus.html" target="_blank">
+                <button>About Us</button>
+            </a>
+        </nav>
+    </header>
+
+    <table>
+        <caption style="background-color: black;"></caption>
+        <thead>
+            <tr>
+                <th>Base Form (V1)</th>
+                <th>Past Form (V2)</th>
+                <th>Past Participle (V3)</th>
+            </tr>
+        </thead>
+        <tbody id="verbs-table-body">
+            <!-- Verb rows will be added here dynamically -->
+        </tbody>
+    </table>
+</head>
+
+<body>
+  
+
+<script>
+ const verbs = [
+  ["go", "went", "gone"],
+  ["eat", "ate", "eaten"],
+  ["write", "wrote", "written"],
+  ["speak", "spoke", "spoken"],
+  ["begin", "began", "begun"],
+  ["break", "broke", "broken"],
+  ["bring", "brought", "brought"],
+  ["buy", "bought", "bought"],
+  ["catch", "caught", "caught"],
+  ["choose", "chose", "chosen"],
+  ["come", "came", "come"],
+  ["do", "did", "done"],
+  ["drink", "drank", "drunk"],
+  ["drive", "drove", "driven"],
+  ["fall", "fell", "fallen"],
+  ["feel", "felt", "felt"],
+  ["find", "found", "found"],
+  ["fly", "flew", "flown"],
+  ["forget", "forgot", "forgotten"],
+  ["get", "got", "gotten"],
+  ["give", "gave", "given"],
+  ["grow", "grew", "grown"],
+  ["have", "had", "had"],
+  ["hear", "heard", "heard"],
+  ["know", "knew", "known"],
+  ["leave", "left", "left"],
+  ["lose", "lost", "lost"],
+  ["make", "made", "made"],
+  ["meet", "met", "met"],
+  ["pay", "paid", "paid"],
+  ["put", "put", "put"],
+  ["read", "read", "read"],
+  ["run", "ran", "run"],
+  ["say", "said", "said"],
+  ["see", "saw", "seen"],
+  ["sell", "sold", "sold"],
+  ["send", "sent", "sent"],
+  ["Abide", "Abode", "Abode"],
+  ["Arise", "Arose", "Arisen"],
+  ["Behold", "Beheld", "Beheld"],
+  ["Bite", "Bit", "Bitten"],
+  ["Bleed", "Bled", "Bled"],
+  ["Blow", "Blew", "Blown"],
+  ["Break", "Broke", "Broken"],
+  ["Breed", "Bred", "Bred"],
+  ["Bring", "Brought", "Brought"],
+  ["Build", "Built", "Built"],
+  ["Burn", "Burned/Burnt", "Burned/Burnt"],
+  ["Buy", "Bought", "Bought"],
+  ["Catch", "Caught", "Caught"],
+  ["Choose", "Chose", "Chosen"],
+  ["Come", "Came", "Come"],
+  ["Cost", "Cost", "Cost"],
+  ["Creep", "Crept", "Crept"],
+  ["Cut", "Cut", "Cut"],
+  ["Deal", "Dealt", "Dealt"],
+  ["Dig", "Dug", "Dug"],
+  ["Do", "Did", "Done"],
+  ["Draw", "Drew", "Drawn"],
+  ["Drink", "Drank", "Drunk"],
+  ["Drive", "Drove", "Driven"],
+  ["Eat", "Ate", "Eaten"],
+  ["Fall", "Fell", "Fallen"],
+  ["Feel", "Felt", "Felt"],
+  ["Fight", "Fought", "Fought"],
+  ["Find", "Found", "Found"],
+  ["Flee", "Fled", "Fled"],
+  ["Fly", "Flew", "Flown"],
+  ["Forbid", "Forbade", "Forbidden"],
+  ["Forget", "Forgot", "Forgotten"],
+  ["Forgive", "Forgave", "Forgiven"],
+  ["Freeze", "Froze", "Frozen"],
+  ["Get", "Got", "Gotten"],
+  ["Give", "Gave", "Given"],
+  ["Go", "Went", "Gone"],
+  ["Grow", "Grew", "Grown"],
+  ["Hang", "Hung", "Hung"],
+  ["Have", "Had", "Had"],
+  ["Hear", "Heard", "Heard"],
+  ["Hide", "Hid", "Hidden"],
+  ["Hit", "Hit", "Hit"],
+  ["Hold", "Held", "Held"],
+  ["Hurt", "Hurt", "Hurt"],
+  ["Keep", "Kept", "Kept"],
+  ["Kneel", "Knelt", "Knelt"],
+  ["Know", "Knew", "Known"],
+  ["Lay", "Laid", "Laid"],
+  ["Lead", "Led", "Led"],
+  ["Leap", "Leapt", "Leapt"],
+  ["Learn", "Learned/Learnt", "Learned/Learnt"],
+  ["Leave", "Left", "Left"],
+  ["Lend", "Lent", "Lent"],
+  ["Let", "Let", "Let"],
+  ["Lie", "Lay", "Lain"],
+  ["Light", "Lit", "Lit"],
+  ["Lose", "Lost", "Lost"],
+  ["Make", "Made", "Made"],
+  ["Mean", "Meant", "Meant"],
+  ["Meet", "Met", "Met"],
+  ["Melt", "Melted", "Melted"],
+  ["Mow", "Mowed", "Mown/Mowed"],
+  ["Overcome", "Overcame", "Overcome"],
+  ["Pay", "Paid", "Paid"],
+  ["Put", "Put", "Put"],
+  ["Read", "Read", "Read"],
+  ["Ride", "Rode", "Ridden"],
+  ["Ring", "Rang", "Rung"],
+  ["Rise", "Rose", "Risen"],
+  ["Run", "Ran", "Run"],
+  ["Say", "Said", "Said"],
+  ["See", "Saw", "Seen"],
+  ["Sell", "Sold", "Sold"],
+  ["Send", "Sent", "Sent"],
+  ["Set", "Set", "Set"],
+  ["Shake", "Shook", "Shaken"],
+  ["Shine", "Shone", "Shone"],
+  ["Shoot", "Shot", "Shot"],
+  ["Show", "Showed", "Shown"],
+  ["Shrink", "Shrank", "Shrunk"],
+  ["Shut", "Shut", "Shut"],
+  ["Sing", "Sang", "Sung"],
+  ["Sink", "Sank", "Sunk"],
+  ["Sit", "Sat", "Sat"],
+  ["Sleep", "Slept", "Slept"],
+  ["Slay", "Slew", "Slain"],
+  ["Speak", "Spoke", "Spoken"],
+  ["Spend", "Spent", "Spent"],
+  ["Spill", "Spilled/Spilt", "Spilled/Spilt"],
+  ["Spin", "Spun", "Spun"],
+  ["Spit", "Spat", "Spat"],
+  ["Split", "Split", "Split"],
+  ["Spread", "Spread", "Spread"],
+  ["Spring", "Sprang", "Sprung"],
+  ["Stand", "Stood", "Stood"],
+  ["Steal", "Stole", "Stolen"],
+  ["Stick", "Stuck", "Stuck"],
+  ["Sting", "Stung", "Stung"],
+  ["Strike", "Struck", "Struck"],
+  ["Swear", "Swore", "Sworn"],
+  ["Sweat", "Sweat", "Sweat"],
+  ["Sweep", "Swept", "Swept"],
+  ["Swim", "Swam", "Swum"],
+  ["Swing", "Swung", "Swung"],
+  ["Take", "Took", "Taken"],
+  ["Teach", "Taught", "Taught"],
+  ["Tear", "Tore", "Torn"],
+  ["Tell", "Told", "Told"],
+  ["Think", "Thought", "Thought"],
+  ["Throw", "Threw", "Thrown"],
+  ["Thrust", "Thrust", "Thrust"],
+  ["Tread", "Trod", "Trodden"],
+  ["Understand", "Understood", "Understood"],
+  ["Wake", "Woke", "Woken"],
+  ["Wear", "Wore", "Worn"],
+  ["Weep", "Wept", "Wept"],
+  ["Win", "Won", "Won"],
+  ["Wind", "Wound", "Wound"],
+  ["Write", "Wrote", "Written"],
+  ["set", "set", "set"],
+  ["Abide", "Abode", "Abode"],
+  ["Alight", "Alit", "Alit"],
+  ["Arise", "Arose", "Arisen"],
+  ["Astride", "Astride", "Astride"],
+  ["Bite", "Bit", "Bitten"],
+  ["Bleed", "Bled", "Bled"],
+  ["Blow", "Blew", "Blown"],
+  ["Break", "Broke", "Broken"],
+  ["Breed", "Bred", "Bred"],
+  ["Burn", "Burned/Burnt", "Burned/Burnt"],
+  ["Chide", "Chid", "Chidden"],
+  ["Cling", "Clung", "Clung"],
+  ["Creep", "Crept", "Crept"],
+  ["Deal", "Dealt", "Dealt"],
+  ["Dig", "Dug", "Dug"],
+  ["Do", "Did", "Done"],
+  ["Draw", "Drew", "Drawn"],
+  ["Drink", "Drank", "Drunk"],
+  ["Drive", "Drove", "Driven"],
+  ["Eat", "Ate", "Eaten"],
+  ["Fall", "Fell", "Fallen"],
+  ["Feel", "Felt", "Felt"],
+  ["Fight", "Fought", "Fought"],
+  ["Find", "Found", "Found"],
+  ["Flee", "Fled", "Fled"],
+  ["Fly", "Flew", "Flown"],
+  ["Forbid", "Forbade", "Forbidden"],
+  ["Forget", "Forgot", "Forgotten"],
+  ["Forgive", "Forgave", "Forgiven"],
+  ["Freeze", "Froze", "Frozen"],
+  ["Get", "Got", "Gotten"],
+  ["Give", "Gave", "Given"],
+  ["Go", "Went", "Gone"],
+  ["Grow", "Grew", "Grown"],
+  ["Hang", "Hung", "Hung"],
+  ["Know", "Knew", "Known"],
+  ["Hurt", "Hurt", "Hurt"],
+  ["Keep", "Kept", "Kept"],
+  ["Kneel", "Knelt", "Knelt"],
+  ["Lay", "Laid", "Laid"],
+  ["Lead", "Led", "Led"],
+  ["Leap", "Leapt", "Leapt"],
+  ["Learn", "Learned/Learnt", "Learned/Learnt"],
+  ["Leave", "Left", "Left"],
+  ["Lend", "Lent", "Lent"],
+  ["Lie", "Lay", "Lain"],
+  ["Light", "Lit", "Lit"],
+  ["Lose", "Lost", "Lost"],
+  ["Make", "Made", "Made"],
+  ["Mean", "Meant", "Meant"],
+  ["Meet", "Met", "Met"],
+  ["Melt", "Melted", "Melted"],
+  ["Mow", "Mowed", "Mown/Mowed"],
+  ["Overcome", "Overcame", "Overcome"],
+  ["Pay", "Paid", "Paid"],
+  ["Put", "Put", "Put"],
+  ["Read", "Read", "Read"],
+  ["Ride", "Rode", "Ridden"],
+  ["Ring", "Rang", "Rung"],
+  ["Rise", "Rose", "Risen"],
+  ["Run", "Ran", "Run"],
+  ["Say", "Said", "Said"],
+  ["See", "Saw", "Seen"],
+  ["Sell", "Sold", "Sold"],
+  ["Send", "Sent", "Sent"],
+  ["Set", "Set", "Set"],
+  ["Shake", "Shook", "Shaken"],
+  ["Shine", "Shone", "Shone"],
+  ["Shoot", "Shot", "Shot"],
+  ["Show", "Showed", "Shown"],
+  ["Shrink", "Shrank", "Shrunk"],
+  ["Shut", "Shut", "Shut"],
+  ["Sing", "Sang", "Sung"],
+  ["Sink", "Sank", "Sunk"],
+  ["Sit", "Sat", "Sat"],
+  ["Sleep", "Slept", "Slept"],
+  ["Slay", "Slew", "Slain"],
+  ["Speak", "Spoke", "Spoken"],
+  ["Spend", "Spent", "Spent"],
+  ["Spill", "Spilled/Spilt", "Spilled/Spilt"],
+  ["Spin", "Spun", "Spun"],
+  ["Spit", "Spat", "Spat"],
+  ["Split", "Split", "Split"],
+  ["Spread", "Spread", "Spread"],
+  ["Spring", "Sprang", "Sprung"],
+  ["Stand", "Stood", "Stood"],
+  ["Steal", "Stole", "Stolen"],
+  ["Stick", "Stuck", "Stuck"],
+  ["Sting", "Stung", "Stung"],
+  ["Strike", "Struck", "Struck"],
+  ["Swear", "Swore", "Sworn"],
+  ["Sweat", "Sweat", "Sweat"],
+  ["Sweep", "Swept", "Swept"],
+  ["Swim", "Swam", "Swum"],
+  ["Swing", "Swung", "Swung"],
+  ["Take", "Took", "Taken"],
+  ["Teach", "Taught", "Taught"],
+  ["Tear", "Tore", "Torn"],
+  ["Tell", "Told", "Told"],
+  ["Think", "Thought", "Thought"],
+  ["Throw", "Threw", "Thrown"],
+  ["Thrust", "Thrust", "Thrust"],
+  ["Tread", "Trod", "Trodden"],
+  ["Understand", "Understood", "Understood"],
+  ["Wake", "Woke", "Woken"],
+  ["Wear", "Wore", "Worn"],
+  ["Weep", "Wept", "Wept"],
+  ["Win", "Won", "Won"],
+  ["Wind", "Wound", "Wound"],
+  ["Write", "Wrote", "Written"],
+  ["Bid", "Bid", "Bid"],
+  ["Bind", "Bound", "Bound"],
+  ["Bite", "Bit", "Bitten"],
+  ["Bleed", "Bled", "Bled"],
+  ["Blow", "Blew", "Blown"],
+  ["Burst", "Burst", "Burst"],
+  ["Cast", "Cast", "Cast"],
+  ["Cleave", "Cleft", "Cleft"],
+  ["Cling", "Clung", "Clung"],
+  ["Creep", "Crept", "Crept"],
+  ["Cut", "Cut", "Cut"],
+  ["Dare", "Dared", "Dared"],
+  ["Dwell", "Dwelt", "Dwelt"],
+  ["Forsake", "Forsook", "Forsaken"],
+  ["Foreswear", "Foreswore", "Foresworn"],
+  ["Furl", "Furled", "Furled"],
+  ["Grind", "Ground", "Ground"],
+  ["Grin", "Grinned", "Grinned"],
+  ["Hew", "Hewed", "Heewn"],
+  ["Knit", "Knit", "Knit"],
+  ["Lean", "Leant", "Leant"],
+  ["Leap", "Leaped", "Leaped"],
+  ["Leaven", "Leavened", "Leavened"],
+  ["Lend", "Lent", "Lent"],
+  ["Let", "Let", "Let"],
+  ["Loom", "Loomed", "Loomed"],
+  ["Melt", "Melted", "Melted"],
+  ["Mow", "Mowed", "Mown"],
+  ["Outbid", "Outbid", "Outbid"],
+  ["Outgrow", "Outgrew", "Outgrown"],
+  ["Outrun", "Outran", "Outrun"],
+  ["Overcome", "Overcame", "Overcome"],
+  ["Overtake", "Overtook", "Overtaken"],
+  ["Overthrow", "Overthrew", "Overthrown"],
+  ["Prove", "Proved", "Proven"],
+  ["Rend", "Rent", "Rent"],
+  ["Reproach", "Reproached", "Reproached"],
+  ["Reseat", "Resat", "Resat"],
+  ["Rise", "Rose", "Risen"],
+  ["Run", "Ran", "Run"],
+  ["Saw", "Sawed", "Sawed"],
+  ["Seek", "Sought", "Sought"],
+  ["Set", "Set", "Set"],
+  ["Shake", "Shook", "Shaken"],
+  ["Sing", "Sang", "Sung"],
+  ["Sink", "Sank", "Sunk"],
+  ["Slay", "Slew", "Slain"],
+  ["Slink", "Slunk", "Slunk"],
+  ["Spit", "Spat", "Spat"],
+  ["Strive", "Strove", "Striven"],
+  ["Swear", "Swore", "Sworn"],
+  ["Tear", "Tore", "Torn"],
+  ["Thrust", "Thrust", "Thrust"],
+  ["Wring", "Wrung", "Wrung"],
+  ["Wear", "Wore", "Worn"],
+  ["sit", "sat", "sat"],
+  ["sleep", "slept", "slept"],
+  ["spend", "spent", "spent"],
+  ["stand", "stood", "stood"],
+  ["take", "took", "taken"],
+  ["teach", "taught", "taught"],
+  ["tell", "told", "told"],
+  ["think", "thought", "thought"],
+  ["understand", "understood", "understood"],
+  ["wear", "wore", "worn"],
+  ["win", "won", "won"],
+  ["write", "wrote", "written"],
+  ["accept", "accepted", "accepted"],
+  ["allow", "allowed", "allowed"],
+  ["ask", "asked", "asked"],
+  ["believe", "believed", "believed"],
+  ["borrow", "borrowed", "borrowed"],
+  ["clean", "cleaned", "cleaned"],
+  ["close", "closed", "closed"],
+  ["cook", "cooked", "cooked"],
+  ["dance", "danced", "danced"],
+  ["deliver", "delivered", "delivered"],
+  ["die", "died", "died"],
+  ["enjoy", "enjoyed", "enjoyed"],
+  ["explain", "explained", "explained"],
+  ["help", "helped", "helped"],
+  ["learn", "learned", "learned"],
+  ["listen", "listened", "listened"],
+  ["live", "lived", "lived"],
+  ["look", "looked", "looked"],
+  ["open", "opened", "opened"],
+  ["play", "played", "played"],
+  ["rain", "rained", "rained"],
+  ["remember", "remembered", "remembered"],
+  ["show", "showed", "shown"],
+  ["start", "started", "started"],
+  ["study", "studied", "studied"],
+  ["talk", "talked", "talked"],
+  ["travel", "traveled", "traveled"],
+  ["wait", "waited", "waited"],
+  ["walk", "walked", "walked"],
+  ["want", "wanted", "wanted"],
+  ["wash", "washed", "washed"],
+  ["watch", "watched", "watched"],
+  ["work", "worked", "worked"],
+  ["agree", "agreed", "agreed"],
+  ["argue", "argued", "argued"],
+  ["arrive", "arrived", "arrived"],
+  ["ask", "asked", "asked"],
+  ["bathe", "bathed", "bathed"],
+  ["beg", "begged", "begged"],
+  ["climb", "climbed", "climbed"],
+  ["confess", "confessed", "confessed"],
+  ["create", "created", "created"],
+  ["decorate", "decorated", "decorated"],
+  ["improve", "improved", "improved"],
+  ["invent", "invented", "invented"],
+  ["jump", "jumped", "jumped"],
+  ["kiss", "kissed", "kissed"],
+  ["laugh", "laughed", "laughed"],
+  ["measure", "measured", "measured"],
+  ["mix", "mixed", "mixed"],
+  ["need", "needed", "needed"],
+  ["notice", "noticed", "noticed"],
+  ["paint", "painted", "painted"],
+  ["plant", "planted", "planted"],
+  ["pour", "poured", "poured"],
+  ["receive", "received", "received"],
+  ["repair", "repaired", "repaired"],
+  ["return", "returned", "returned"],
+  ["smile", "smiled", "smiled"],
+  ["travel", "traveled", "traveled"],
+  ["whisper", "whispered", "whispered"]
+];
+const tbody = document.getElementById("verbs-table-body");
+verbs.forEach(verb => {
+    const row = document.createElement("tr");
+    verb.forEach(form => {
+        const cell = document.createElement("td");
+        cell.textContent = form;
+        row.appendChild(cell);
+    });
+    tbody.appendChild(row);
+});
+</script>
+
+
+
+
+
+</body>
+</html>
